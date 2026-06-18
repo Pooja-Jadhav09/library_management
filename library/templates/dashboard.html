@@ -1,0 +1,180 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="p-5 mb-4 rounded shadow text-white"
+     style="
+     background:
+     linear-gradient(
+     rgba(0,0,0,0.5),
+     rgba(0,0,0,0.5)
+     ),
+     url('https://images.unsplash.com/photo-1521587760476-6c12a4b040da');
+     background-size: cover;
+     background-position: center;
+     ">
+
+    <h1 class="display-5 fw-bold">
+        📚 Library Management System
+    </h1>
+
+    <p class="lead">
+       Empowering learning through organized access to knowledge and resources.
+    </p>
+
+</div>
+
+<h2 class="mb-4">
+    Dashboard
+</h2>
+<div class="row">
+    <div class="col-md-3 mb-3">
+
+     <div class="card shadow border-0">
+
+        <div class="card-body text-center">
+
+            <h5>Total Book Titles</h5>
+
+            <h2>
+                {{ total_book_titles }}
+            </h2>
+
+         </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="col-md-3 mb-3">
+
+        <div class="card shadow border-0">
+
+            <div class="card-body text-center">
+
+                <h5>Total Books</h5>
+
+                <h2>
+                    {{ total_books }}
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3 mb-3">
+
+        <div class="card shadow border-0">
+
+            <div class="card-body text-center">
+
+                <h5>Total Members</h5>
+
+                <h2>
+                    {{ total_members }}
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3 mb-3">
+
+        <div class="card shadow border-0">
+
+            <div class="card-body text-center">
+
+                <h5>Books Issued</h5>
+
+                <h2>
+                    {{ issued_books }}
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3 mb-3">
+
+        <div class="card shadow border-0">
+
+            <div class="card-body text-center">
+
+                <h5>Books Returned</h5>
+
+                <h2>
+                    {{ returned_books }}
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3 mb-3">
+
+        <div class="card shadow border-0">
+
+            <div class="card-body text-center">
+
+                <h5>Overdue Books</h5>
+
+                <h2>
+                    {{ overdue_books }}
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="mt-4">
+
+{% if user.groups.all.0.name != "user" %}
+
+    <a
+        href="{% url 'book_list' %}"
+        class="btn btn-primary me-2"
+    >
+        Manage Books
+    </a>
+
+{% endif %}
+
+{% if user.groups.all.0.name == "admin" %}
+
+    <a
+        href="{% url 'member_list' %}"
+        class="btn btn-success me-2"
+    >
+        Manage Members
+    </a>
+
+{% endif %}
+
+{% if user.groups.all.0.name != "user" %}
+
+    <a
+        href="{% url 'issued_books' %}"
+        class="btn btn-warning"
+    >
+        Issued Books
+    </a>
+
+{% endif %}
+
+</div>
+
+{% endblock %}
